@@ -17,7 +17,7 @@ package
 			
 			// Debug console
 			FP.console.enable();
-			FP.console.watch('destinationX', 'destinationY', 'moving', 'row', 'col');			
+			FP.console.watch('col', 'row', 'colsCovered', 'rowsCovered');			
 			
 			FP.world = new GameWorld;
 		}

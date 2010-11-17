@@ -18,6 +18,8 @@ package
 		// this is the position of the top left corner of the entity)
 		public var col:int = 1;			
 		public var row:int = 1;	
+		public var colsCovered:Array;	// If widthInGrid is greater than 1 this will contain more than 1 col;
+		public var rowsCovered:Array;	// If heightInGrid is greater than 1 this will contain more than 1 row;
 		
 		// The speed that the entity moves between cells
 		public var speed:Number;
@@ -49,12 +51,16 @@ package
 					distanceToDestination = Math.abs(x - destinationX);
 				else	
 					distanceToDestination = Math.abs(y - destinationY);
+				
+				// Reached destination cell
 				if (distanceToDestination <= speed * FP.elapsed)
 				{
 					x = destinationX;
 					y = destinationY;
 					col = destinationCol;
 					row = destinationRow;
+					updateColsCovered();
+					updateRowsCovered();
 					moving = false;
 				}
 				else
@@ -71,21 +77,37 @@ package
 		 */
 		public function alignToGrid(col:int, row:int):void
 		{
-			x = FarmGrid.GRID_POS.x + col * FarmGrid.CELL_WIDTH * widthInGrid - FarmGrid.CELL_WIDTH / 2 * widthInGrid;
-			y = FarmGrid.GRID_POS.y + row * FarmGrid.CELL_HEIGHT * heightInGrid - FarmGrid.CELL_HEIGHT / 2 * heightInGrid;
+			x = Farm.GRID_POS.x + col * Farm.CELL_WIDTH * widthInGrid - Farm.CELL_WIDTH / 2 * widthInGrid;
+			y = Farm.GRID_POS.y + row * Farm.CELL_HEIGHT * heightInGrid - Farm.CELL_HEIGHT / 2 * heightInGrid;
 			this.col = col;
 			this.row = row;
+			updateColsCovered();
+			updateRowsCovered();
 		}
+		
+		public function updateColsCovered():void
+		{
+			colsCovered = [];
+			for (var c:int = col; c < col + widthInGrid; c++)
+				colsCovered.push(c);
+		}
+		
+		public function updateRowsCovered():void
+		{
+			rowsCovered = [];
+			for (var r:int = row; r < row + heightInGrid; r++)
+				rowsCovered.push(r);
+		}		
 		
 		/**
 		 * @return	Whether the entity can move up in the grid, or not.
 		 */
 		public function canMoveUp():Boolean
 		{
-			if (row > 1)
-				return true;
-			else
+			if (row <= 1)
 				return false;
+			else	
+				return true;
 		}
 		
 		/**
@@ -93,10 +115,10 @@ package
 		 */		
 		public function canMoveDown():Boolean
 		{
-			if (row + (heightInGrid - 1) < FarmGrid.GRID_ROWS)
-				return true;
+			if (row >= Farm.GRID_ROWS)
+				return false;
 			else
-				return false;			
+				return true;		
 		}
 		
 		/**
@@ -104,10 +126,10 @@ package
 		 */		
 		public function canMoveLeft():Boolean
 		{
-			if (col > 1)
+			if (col <= 1)
+				return false;
+			else
 				return true;
-			else 
-				return false
 		}
 		
 		/**
@@ -115,10 +137,10 @@ package
 		 */		
 		public function canMoveRight():Boolean
 		{
-			if (col + (widthInGrid - 1) < FarmGrid.GRID_COLS)
+			if (col >= Farm.GRID_COLS)
+				return false;
+			else
 				return true;
-			else 
-				return false
 		}		
 		
 	}

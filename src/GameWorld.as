@@ -9,12 +9,12 @@ package
 	 */
 	public class GameWorld extends World
 	{
-		public static var player:Player;
+		public static var farmerPlanter:FarmerPlanter;
 		
 		public function GameWorld() 
 		{
-			add(new FarmGrid);
-			add(player = new Player());
+			add(new Farm);
+			add(farmerPlanter = new FarmerPlanter());
 		}
 		
 	}
