@@ -52,9 +52,9 @@ package
 			Input.define("Plant", Key.P);
 			
 			// Input checker
-			myInputChecker = new InputChecker(this, "..-,$%*&@#");
+			myInputChecker = new InputChecker(this, "1984 - year of the fire; everything burns.");
 			
-			
+			justReachedDestination = true;
 		}	
 		
 		override public function added():void

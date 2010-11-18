@@ -16,13 +16,17 @@ package
 		public var text:Text;
 		public var bg:Image;
 		
+		[Embed(source = '../assets/fonts/CasualEncounter.ttf', embedAsCFF="false", fontFamily = 'CasualEncounter')] private var CasualEncounter:Class;
+		
 		public function TextEntity(textString:String, x:Number = 0, y:Number = 0) 
 		{
 			super(x, y);
 			layer = -100;
 			x = 400;
-			y = 500;
+			y = 500;		
 			text = new Text(textString, x, y);
+			text.font = 'CasualEncounter';
+			text.size = 8;
 			
 			// Initialize text rendering
 			text.originX = text.width / 2;
