@@ -52,7 +52,7 @@ package
 			Input.define("Plant", Key.P);
 			
 			// Input checker
-			myInputChecker = new InputChecker(this, "1984 The world is on fire.");
+			myInputChecker = new InputChecker(this, "..-,$%*&@#");
 			
 			
 		}	

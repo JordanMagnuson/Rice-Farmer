@@ -215,19 +215,26 @@
 		}
 		
 		/** @private Event handler for key press. */
-		private static function onKeyDown(e:KeyboardEvent = null):void
+		private static function onKeyDown(e:KeyboardEvent):void
 		{
 			// get the keycode
-			var code:int = lastKey = e.keyCode;
+			var code:int = e.keyCode;
 			
 			// update the keystring
 			if (code == Key.BACKSPACE) keyString = keyString.substring(0, keyString.length - 1);
-			else if ((code > 47 && code < 58) || (code > 64 && code < 91) || code == 32)
+			else if((code > 31 && code < 127) || (code > 185 && code < 193))
 			{
 				if (keyString.length > KEYSTRING_MAX) keyString = keyString.substring(1);
-				var char:String = String.fromCharCode(code);
-				if (e.shiftKey || Keyboard.capsLock) char = char.toLocaleUpperCase();
-				else char = char.toLocaleLowerCase();
+				var char:String = String.fromCharCode(e.charCode);
+				if (e.shiftKey || Keyboard.capsLock)
+				{
+					char = char.toLocaleUpperCase();
+				}
+				else
+				{
+					char = char.toLocaleLowerCase();
+				}
+				
 				keyString += char;
 			}
 			
