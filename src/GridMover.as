@@ -18,14 +18,15 @@ package
 		// this is the position of the top left corner of the entity)
 		public var col:int = 1;			
 		public var row:int = 1;	
-		public var colsCovered:Array;	// If widthInGrid is greater than 1 this will contain more than 1 col;
-		public var rowsCovered:Array;	// If heightInGrid is greater than 1 this will contain more than 1 row;
+		public var colsCovered:Array;	// If widthInGrid is greater than 1 this will contain more than 1 col.
+		public var rowsCovered:Array;	// If heightInGrid is greater than 1 this will contain more than 1 row.
 		
 		// The speed that the entity moves between cells
 		public var speed:Number;
 		
 		// Whether the entity is moving, or stationary
 		public var moving:Boolean = false;
+		public var justReachedDestination:Boolean = false;	// Stays true for one cycle after reaching a new cell.
 		
 		// Direction in degrees; 0 is right, 90 is up. For moving.
 		public var direction:Number;
@@ -43,6 +44,9 @@ package
 		
 		override public function update():void
 		{
+			if (justReachedDestination)
+				justReachedDestination = false;
+			
 			// Move
 			if (moving)
 			{
@@ -55,6 +59,7 @@ package
 				// Reached destination cell
 				if (distanceToDestination <= speed * FP.elapsed)
 				{
+					justReachedDestination = true;
 					x = destinationX;
 					y = destinationY;
 					col = destinationCol;

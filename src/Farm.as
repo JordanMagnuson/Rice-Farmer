@@ -15,9 +15,9 @@ package
 	public class Farm extends Entity
 	{
 		// Grid size constants
-		public static const GRID_POS:Point = new Point(30, 30);	// Location of top left corner	
+		public static const GRID_POS:Point = new Point(30, 100);	// Location of top left corner	
 		public static const GRID_COLS:int = 16;		
-		public static const GRID_ROWS:int = 12;
+		public static const GRID_ROWS:int = 8;
 		public static const CELL_WIDTH:int = 40;	// Width in pixels
 		public static const CELL_HEIGHT:int = 40;	// Height in pixels		
 		
@@ -32,8 +32,6 @@ package
 		public function Farm() 
 		{
 			layer = 10;
-			Input.define("Generate", Key.G);
-			Input.define("Clear", Key.C);
 		}
 		
 		override public function added():void
@@ -188,12 +186,7 @@ package
 		}	
 		
 		override public function update():void
-		{
-			if (Input.pressed("Generate"))
-				generateFarmland();
-			if (Input.pressed("Clear"))
-				clearFarmland();				
-				
+		{					
 			super.update();
 		}
 		
