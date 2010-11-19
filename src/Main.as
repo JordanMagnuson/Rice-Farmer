@@ -2,6 +2,7 @@ package
 {
 	import net.flashpunk.Engine;
 	import net.flashpunk.FP;
+	import worlds.GameWorld;
 	
 	/**
 	 * ...
@@ -20,7 +21,7 @@ package
 			
 			// Debug console
 			FP.console.enable();
-			FP.console.watch('col', 'row', 'colsCovered', 'rowsCovered');			
+			FP.console.watch('col', 'row');			
 			
 			FP.world = new GameWorld;
 		}

@@ -148,6 +148,58 @@ package
 				return true;
 		}		
 		
+		/**
+		 * Starts the entity moving up in the grid.
+		 */
+		public function moveUp():void
+		{
+			moving = true;
+			direction = 90;
+			destinationX = x;
+			destinationY = y - Farm.CELL_HEIGHT * heightInGrid;
+			destinationCol = col;				
+			destinationRow = row - heightInGrid;			
+		}
+		
+		/**
+		 * Starts the entity moving down in the grid.
+		 */
+		public function moveDown():void
+		{
+			moving = true;
+			direction = 270;
+			destinationX = x;
+			destinationY = y + Farm.CELL_HEIGHT * heightInGrid;
+			destinationCol = col;				
+			destinationRow = row + heightInGrid;			
+		}		
+		
+		/**
+		 * Starts the entity moving left in the grid.
+		 */
+		public function moveLeft():void
+		{
+			moving = true;
+			direction = 180;
+			destinationX = x - Farm.CELL_WIDTH * widthInGrid ;
+			destinationY = y;
+			destinationCol = col - widthInGrid;				
+			destinationRow = row;		
+		}	
+		
+		/**
+		 * Starts the entity moving left in the grid.
+		 */
+		public function moveRight():void
+		{
+			moving = true;
+			direction = 0;
+			destinationX = x + Farm.CELL_WIDTH * widthInGrid ;
+			destinationY = y;
+			destinationCol = col + widthInGrid;				
+			destinationRow = row;		
+		}				
+		
 	}
 
 }

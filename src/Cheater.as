@@ -4,6 +4,7 @@ package
 	import net.flashpunk.Entity;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
+	import worlds.GameWorld;
 	
 	/**
 	 * ...
@@ -15,8 +16,8 @@ package
 		
 		public function Cheater() 
 		{
-			Input.define("Generate", Key.F1);
-			Input.define("Clear", Key.F2);
+			Input.define("Restart", Key.F1);
+			Input.define("Generate", Key.F2);
 		}
 		
 		public static function enable():void
@@ -28,6 +29,10 @@ package
 		{
 			if (enabled)
 			{
+				if (Input.pressed("Restart"))
+				{
+					FP.world = new GameWorld;
+				}
 				if (Input.pressed("Generate"))
 					GameWorld.farm.generateFarmland();
 				//if (Input.pressed("Clear"))

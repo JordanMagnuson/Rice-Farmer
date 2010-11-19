@@ -40,7 +40,6 @@ package
 			// Grid information
 			widthInGrid = 1;
 			heightInGrid = 1;
-			alignToGrid(1, 1);
 			speed = 100;
 			
 			// Define controls
@@ -48,8 +47,6 @@ package
 			Input.define("D", Key.DOWN);			
 			Input.define("L", Key.LEFT);	
 			Input.define("R", Key.RIGHT);	
-			
-			Input.define("Plant", Key.P);
 			
 			// Input checker
 			myInputChecker = new InputChecker(this, "1984 - year of the fire; everything burns.");
@@ -79,6 +76,8 @@ package
 				// Planting
 				if (myInputChecker.inputMatch())
 				{
+					if (!PlantingPhase.started)
+						PlantingPhase.start();
 					plant();
 				}
 				
@@ -87,39 +86,19 @@ package
 				{
 					if (Input.check("U") && canMoveUp())
 					{
-						moving = true;
-						direction = 90;
-						destinationX = x;
-						destinationY = y - Farm.CELL_HEIGHT * heightInGrid;
-						destinationCol = col;				
-						destinationRow = row - heightInGrid;
+						moveUp();
 					}
 					else if (Input.check("D") && canMoveDown())
 					{
-						moving = true;
-						direction = 270;
-						destinationX = x;
-						destinationY = y + Farm.CELL_HEIGHT * heightInGrid;
-						destinationCol = col;				
-						destinationRow = row + heightInGrid;
-					}
+						moveDown();
+					}	
 					else if (Input.check("L") && canMoveLeft())
 					{
-						moving = true;
-						direction = 180;
-						destinationX = x - Farm.CELL_WIDTH * widthInGrid ;
-						destinationY = y;
-						destinationCol = col - widthInGrid;				
-						destinationRow = row;
+						moveLeft();
 					}
 					else if (Input.check("R") && canMoveRight())
 					{
-						moving = true;
-						direction = 0;
-						destinationX = x + Farm.CELL_WIDTH * widthInGrid ;
-						destinationY = y;
-						destinationCol = col + widthInGrid;				
-						destinationRow = row;
+						moveRight();
 					}
 				}
 			}

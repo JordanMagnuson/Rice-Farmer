@@ -14,6 +14,7 @@ package
 		public static const GREEN:uint = 0x41D14D;
 		public static const YELLOW:uint = 0xFCFFAB;
 		public static const ORANGE:uint = 0xFFDB63;
+		public static const RED:uint = 0xFF0000;		
 		
 		public function Colors() 
 		{
