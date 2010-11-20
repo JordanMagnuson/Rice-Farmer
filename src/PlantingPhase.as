@@ -29,6 +29,7 @@ package
 			FP.world.add(farmerPlanter = new FarmerPlanter);
 			farmerPlanter.alignToGrid(1, 1);
 			//FP.world.add(displayTimer = new DisplayTimer(400, 50, plantingAlarm));
+			plantingAlarm.reset(GameController.plantingTime);
 			addTween(plantingAlarm);	
 		}
 		
@@ -45,6 +46,7 @@ package
 		
 		public function endPhase():void
 		{
+			// Remove all planting-phase-specific entities
 			trace("planting phase over!");
 			var removeList:Array = new Array();
 			FP.world.getClass(TextEntity, removeList);

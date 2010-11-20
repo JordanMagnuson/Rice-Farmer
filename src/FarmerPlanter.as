@@ -17,10 +17,14 @@ package
 		public var image:Image = new Image(S_FARMER);		
 		
 		// Input checker for planting
-		public var myInputChecker:InputChecker;
+		public var plantInputChecker:InputChecker;
+		public var happyBoostInputChecker:InputChecker;
 		
 		// After moving, the farmer must plant before moving again.
 		public var canMove:Boolean = true;
+		
+		// Number of key presses required to plant rice... varies with happiness, and whether the player is on mud.
+		public var pressesRemaining:int = 1;		
 		
 		public function FarmerPlanter(x:Number = 0, y:Number = 0)  
 		{	
@@ -49,14 +53,15 @@ package
 			Input.define("R", Key.RIGHT);	
 			
 			// Input checker
-			myInputChecker = new InputChecker(this, "1984 - year of the fire; everything burns.");
+			plantInputChecker = new InputChecker(this, "1984 - year of the fire; everything burns.");
+			happyBoostInputChecker = new InputChecker(this, GameController.happyBoostString);
 			
 			justReachedDestination = true;
 		}	
 		
 		override public function added():void
 		{
-			FP.world.add(myInputChecker);
+			FP.world.add(plantInputChecker);
 		}
 		
 		/**
@@ -64,21 +69,46 @@ package
 		 */		
 		override public function update():void 
 		{
+			// Boost happiness if happy boost string typed
+			if (happyBoostInputChecker.inputMatch() && happyBoostInputChecker.complete)
+			{
+				GameController.setNewHappyBoostString();
+				happyBoostInputChecker = new InputChecker(this, GameController.happyBoostString);
+				if (GameController.happiness < Config.MAX_HAPPINESS)
+					GameController.happiness += 2;
+				if (GameController.happiness > Config.MAX_HAPPINESS)
+					GameController.happiness = 2;
+			}			
+			
+			// Determine how many key presses to plant, show string to type.
 			if (justReachedDestination)
 			{
 				canMove = false;
-				myInputChecker.showRenderedText();
+				// Require more presses if happiness is low.
+				if (GameController.happiness < 0)
+					pressesRemaining = 2;
+				// Double presses required if on mud.
+				if (Farm.dirtMatrix[row - 1][col - 1] == 'm')
+					pressesRemaining *= 2;
+				plantInputChecker.showRenderedText();
 			}
 			
 			// Check input
 			if (!moving)
 			{
 				// Planting
-				if (myInputChecker.inputMatch())
+				if (plantInputChecker.inputMatch())
 				{
+					plantInputChecker.fadeOldRenderedText();
 					if (!PlantingPhase.started)
 						PlantingPhase.start();
-					plant();
+					if (pressesRemaining <= 1)
+						plant();
+					else
+					{
+						pressesRemaining--;
+						plantInputChecker.showRenderedText();
+					}
 				}
 				
 				// Movement
@@ -107,6 +137,10 @@ package
 		
 		public function plant():void
 		{	
+			// Lower happiness
+			if (GameController.happiness > Config.MIN_HAPPINESS)
+				GameController.happiness--;
+			
 			// Cash rice
 			if (Farm.dirtMatrix[row - 1][col - 1] == '$')
 			{

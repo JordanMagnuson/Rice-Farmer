@@ -16,6 +16,9 @@ package
 		public var currentIndex:int = 0;
 		public var currentChar:String;
 		
+		// Whether the controllerString has been typed in full.
+		public var complete:Boolean = false;
+		
 		// Rendered text
 		public var renderedText:TextEntity;		// Holds the current renedred text (to show).
 		public var oldRenderedText:TextEntity;	// Holds the last rendered text (to fade).		
@@ -74,12 +77,16 @@ package
 			{
 				// Advance index, or wrap through controllerString if at end.
 				if (currentIndex == controllerString.length - 1)
+				{
+					trace('complete');
+					complete = true;
 					currentIndex = 0;
+				}
 				else
 					currentIndex++;
 				currentChar = controllerString.charAt(currentIndex);
 				//updateRenderedText();
-				fadeOldRenderedText();
+				//fadeOldRenderedText();
 				return true;
 			}
 			// If input does not match...
