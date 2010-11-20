@@ -116,23 +116,23 @@ package
 				// Movement
 				if (canMove)
 				{
-					advance();
-					//if (Input.check("U") && canMoveUp())
-					//{
-						//moveUp();
-					//}
-					//else if (Input.check("D") && canMoveDown())
-					//{
-						//moveDown();
-					//}	
-					//else if (Input.check("L") && canMoveLeft())
-					//{
-						//moveLeft();
-					//}
-					//else if (Input.check("R") && canMoveRight())
-					//{
-						//moveRight();
-					//}
+//					advance();
+					if (Input.check("U") && canMoveUp())
+					{
+						moveUp();
+					}
+					else if (Input.check("D") && canMoveDown())
+					{
+						moveDown();
+					}	
+					else if (Input.check("L") && canMoveLeft())
+					{
+						moveLeft();
+					}
+					else if (Input.check("R") && canMoveRight())
+					{
+						moveRight();
+					}
 				}
 			}
 			super.update();
