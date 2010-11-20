@@ -22,12 +22,12 @@ package
 		/**
 		 * Time player gets to plant, in seconds.
 		 */
-		public static var plantingTime:Number = 30;
+		public static var plantingTime:Number = 12;
 		
 		/**
 		 * Time player gets to harvest one cell, in seconds.
 		 */
-		public static var harvestTime:Number = 1;
+		public static var harvestTime:Number = 5;
 		
 		/**
 		 * Player variables

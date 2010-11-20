@@ -22,6 +22,10 @@ package
 		{
 			harvestAlarm = new Alarm(GameController.harvestTime, endPhase);
 			addTween(harvestAlarm);
+			trace('-----');
+			trace(Farm.riceMatrix[0]);
+			trace(Farm.riceMatrix[1]);
+			trace(Farm.riceMatrix[2]);				
 		}
 		
 		override public function update():void
