@@ -23,6 +23,8 @@ package
 		// After moving, the farmer must plant before moving again.
 		public var canMove:Boolean = true;
 		
+		public var plantingDirection:String = 'down';
+		
 		// Number of key presses required to plant rice... varies with happiness, and whether the player is on mud.
 		public var pressesRemaining:int = 1;		
 		
@@ -114,26 +116,55 @@ package
 				// Movement
 				if (canMove)
 				{
-					if (Input.check("U") && canMoveUp())
-					{
-						moveUp();
-					}
-					else if (Input.check("D") && canMoveDown())
-					{
-						moveDown();
-					}	
-					else if (Input.check("L") && canMoveLeft())
-					{
-						moveLeft();
-					}
-					else if (Input.check("R") && canMoveRight())
-					{
-						moveRight();
-					}
+					advance();
+					//if (Input.check("U") && canMoveUp())
+					//{
+						//moveUp();
+					//}
+					//else if (Input.check("D") && canMoveDown())
+					//{
+						//moveDown();
+					//}	
+					//else if (Input.check("L") && canMoveLeft())
+					//{
+						//moveLeft();
+					//}
+					//else if (Input.check("R") && canMoveRight())
+					//{
+						//moveRight();
+					//}
 				}
 			}
 			super.update();
 		}	
+
+		public function advance():void
+		{
+			if (plantingDirection == 'down')
+			{
+				if (canMoveDown())
+				{
+					 moveDown();
+				}
+				else if (canMoveRight())
+				{
+					 moveRight();
+					 plantingDirection = 'up';
+				}
+			}
+			else if (plantingDirection == 'up')
+			{
+				if (canMoveUp())
+				{
+					 moveUp();
+				}
+				else if (canMoveRight())
+				{
+					 moveRight();
+					 plantingDirection = 'down';
+				}
+			}
+		}
 		
 		public function plant():void
 		{	
