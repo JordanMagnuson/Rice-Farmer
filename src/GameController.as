@@ -1,6 +1,7 @@
 package  
 {
 	import net.flashpunk.FP;
+	import net.flashpunk.tweens.misc.Alarm;
 	
 	/**
 	 * Static class to keep track of game elements like level and planting phase, etc.
@@ -38,6 +39,12 @@ package
 		public static var happiness:int = Config.HAPPINESS_AT_START;
 		
 		/**
+		 * Pests
+		 */
+		public static var snailReleaseTime:Number = Config.SNAIL_RELEASE_TIME_AT_START;		// How frequently snails are released
+		public static var snailReleaseChance:Number = Config.SNAIL_RELEASE_CHANCE_AT_START;	// Chance of snail release at release time
+		
+		/**
 		 * Current array and string that needs to be typed to boost happiness.
 		 */
 		public static var happyBoostArray:Array = new Array("sing", "rest", "relax", "snooze", "tea", "break");
@@ -45,7 +52,6 @@ package
 		
 		public function GameController() 
 		{
-			
 		}
 		
 		public static function setNewHappyBoostString():void

@@ -16,10 +16,10 @@ package
 	{
 		// Grid size constants
 		public static const GRID_POS:Point = new Point(30, 100);	// Location of top left corner	
-		public static const GRID_COLS:int = 16;		
-		public static const GRID_ROWS:int = 8;
-		public static const CELL_WIDTH:int = 40;	// Width in pixels
-		public static const CELL_HEIGHT:int = 40;	// Height in pixels		
+		public static const GRID_COLS:int = 8;		
+		public static const GRID_ROWS:int = 4;
+		public static const CELL_WIDTH:int = 80;	// Width in pixels
+		public static const CELL_HEIGHT:int = 80;	// Height in pixels		
 		
 		// Calculated constants - don't change
 		public static const GRID_HEIGHT:int = GRID_ROWS * CELL_HEIGHT;

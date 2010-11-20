@@ -16,6 +16,8 @@ package
 		// Keeps track of how long the player has to plant the ENTIRE FIELD.
 		public static var plantingAlarm:Alarm;
 		
+		public static var snailReleaseAlarm:Alarm = new Alarm(GameController.snailReleaseTime, releaseSnail);
+		
 		// The player's avatar during the planting phase.
 		public static var farmerPlanter:FarmerPlanter;
 		
@@ -42,6 +44,11 @@ package
 		{
 			plantingAlarm.start();
 			started = true;
+		}
+		
+		public static function releaseSnail():void
+		{
+			trace('snail released!');
 		}
 		
 		public function endPhase():void

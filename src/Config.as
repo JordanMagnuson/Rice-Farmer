@@ -16,8 +16,14 @@ package
 		/**
 		 * Planting and harvest stuff
 		 */
-		public static const PLANTING_TIME_AT_START:int = 30;
+		public static const PLANTING_TIME_AT_START:int = 60;
 		public static const HARVEST_TIME_AT_START:int = 1;
+		
+		/**
+		 * Pests
+		 */
+		public static const SNAIL_RELEASE_TIME_AT_START:Number = 5;
+		public static const SNAIL_RELEASE_CHANCE_AT_START:Number = 0.5;
 		 
 		/**
 		 * Phases

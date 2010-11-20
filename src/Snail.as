@@ -4,7 +4,7 @@ package
 	 * ...
 	 * @author Jordan Magnuson
 	 */
-	public class Snail
+	public class Snail extends GridMover
 	{
 		
 		public function Snail() 
